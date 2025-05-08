@@ -1,0 +1,111 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f0e3; /* Fondo crema suave */
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif; /* Fuente un poco más agradable */
+    color: #333333; /* Color de texto oscuro para buena lectura */
+}
+
+.container {
+    position: relative;
+    width: 500px; /* Ancho del contenedor S*/
+    height: 600px; /* Alto del contenedor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.envelope {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    perspective: 1000px;
+    transition: transform 0.8s ease-in-out;
+    z-index: 2;
+}
+
+.envelope.open {
+    transform: rotateY(180deg);
+}
+
+.flap {
+    position: absolute;
+    width: 0;
+    height: 0;
+    /* Ajusta los bordes para que coincidan con el ancho del sobre (300px) */
+    border-left: 250px solid transparent;
+    border-right: 250px solid transparent;
+    border-bottom: 100px solid #a0855c; /* Color de la tapa - tono marrón */
+    top: 0;
+    left: 0;
+    transform-origin: top;
+    transition: transform 0.4s ease-in-out;
+    z-index: 3; /* Asegura que la tapa esté encima del cuerpo */
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg); /* Rota la tapa al abrir */
+    /* No cambiamos el z-index aquí, la rotación lo maneja visualmente */
+}
+
+.body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #d2b48c; /* Color del cuerpo del sobre - tono tostado */
+    bottom: 0;
+    left: 0;
+    z-index: 2; /* El cuerpo está debajo de la tapa pero encima de la base */
+}
+
+.bottom {
+    position: absolute;
+    width: 0;
+    height: 0;
+     /* Ajusta los bordes para que coincidan con el ancho del sobre (300px) */
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 100px solid #e9dcc9; /* Color de la parte inferior - tono más claro */
+    bottom: 0;
+    left: 0;
+    z-index: 1; /* La base está en la parte inferior */
+}
+
+
+.letter {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    background-color: #ffffff; /* Fondo de la carta blanco limpio */
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más suave */
+    text-align: center;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1; /* Debajo del sobre inicialmente */
+    display: flex; /* Usamos flexbox para centrar el contenido de la carta */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Incluir padding en el tamaño */
+}
+
+.letter.visible {
+    opacity: 1; /* Visible cuando se añade la clase visible */
+    z-index: 3; /* Encima del sobre cuando es visible */
+}
+
+.letter h2 {
+    color: #e57373; /* Un tono rojo suave para el título */
+    margin-top: 0; /* Eliminar margen superior por defecto */
+}
+
+.letter p {
+    margin: 10px 0; /* Espacio entre párrafos */
+    line-height: 1.5; /* Espaciado de línea para mejor lectura */
+}
